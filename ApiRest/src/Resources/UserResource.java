@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -20,5 +21,13 @@ public class UserResource {
 		users.add(new User("1", "joaquin", "leonelli"));
 		users.add(new User("2", "paulo", "magnago"));
 		return users;
+	}
+	
+	@GET
+	@Path("/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User findById(@PathParam("id") String id){
+		User user = new User();
+		return user;
 	}
 }
