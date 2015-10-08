@@ -29,9 +29,6 @@ public class User implements Serializable{
 	public String getLastname() {
 		return lastname;
 	}
-	public void setPrice(String lastname) {
-		this.lastname = lastname;
-	}
 	
 	public User(String id, String name, String lastname) {
 		super();
