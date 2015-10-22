@@ -15,6 +15,7 @@
 <title>Insert title here</title>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+	<script type="text/javascript" src="./controllers/controller.js"></script>
 </head>
 <body>
 	<div class="container" ng-controller="userController">
@@ -35,30 +36,18 @@
 					<td><input class="form-control" ng-model="user.name"></td>
 					<td><input class="form-control" ng-model="user.lastname"></td>
 					<td><button class="btn btn-primary"
-							ng-click="addContact(user._id)">Guardar</button></td>
+							ng-click="addUser()">Guardar</button></td>
 				</tr>
 				<tr ng-repeat="u in listUsers">
 					<th>{{u.id}}</th>
 					<th>{{u.name}}</th>
 					<th>{{u.lastname}}</th>
+					<td><button class="btn btn-danger" ng-click="remove(u.id)">Borrar</button></td>
+					<td><button class="btn btn-warning" ng-click="edit(u.id)">Editar</button></td>
 				</tr>
 			</tbody>
 		</table>
 
-		<script type="text/javascript">
-			var myapp = angular.module('myapp', []);
-			myapp.controller('userController', function($scope, $http) {
-				$http.get('http://localhost:8080/ApiRest/rest/users').success(
-						function(response) {
-							console.log(response.user);
-							$scope.listUsers = response.user;
-						});
-// 				$http.post('http://localhost:8080/ApiRest/rest/users',
-// 						$scope.user).success(function(response) {
-// 					console.log("success");
-// 				});
-			});
-		</script>
 	</div>
 </body>
 </html>

@@ -25,13 +25,11 @@ public class User implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	
 	@XmlElement	
 	public String getLastname() {
 		return lastname;
 	}
-	
-	public void setLastname(String lastname) {
+	public void setPrice(String lastname) {
 		this.lastname = lastname;
 	}
 	

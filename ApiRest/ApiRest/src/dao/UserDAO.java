@@ -56,10 +56,42 @@ public class UserDAO {
 	}
 	
 	public void saveOrUpdate(User user){
+		User userToUpdate = findById(user.getId());
+		
 		try {
-			getStatement().executeQuery("INSERT INTO users values");
+			if(userToUpdate != null){
+				String updateQuery = "UPDATE users SET " + "NAME='" + user.getName() + "',LASTNAME='" + user.getLastname() + "' WHERE " + "ID='" + user.getId() + "'";
+				getStatement().executeUpdate(updateQuery);
+			}else{
+				String insertQuery = "INSERT INTO users " + "(ID, NAME, LASTNAME) " + "VALUES" + "('" + user.getId()+ "','" +  user.getName() + "','" + user.getLastname() + "')";
+				getStatement().executeUpdate(insertQuery);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	
+	public void remove(String id){
+		try {
+			getStatement().executeUpdate("DELETE FROM users WHERE id=" +  id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public User findById(String id){
+		User user = null;
+		try {
+			ResultSet rs = getStatement().executeQuery(
+					"SELECT * FROM users WHERE id=" + id);
+			while (rs.next())
+		      {
+				user = new User(rs.getString("id"), rs.getString("name"), rs.getString("lastname"));
+		      }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
 	}
 }
